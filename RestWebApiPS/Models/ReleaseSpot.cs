@@ -7,6 +7,6 @@ namespace RestWebApiPS.Models
 {
     public class ReleaseSpot
     {
-
+       public 
     }
 }

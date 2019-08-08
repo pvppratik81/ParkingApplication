@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EntityParkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Genre" Type="nvarchar(max)" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ParkingSlotId" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradeId" />
+          </Key>
+          <Property Name="GradeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GradeName" Type="nvarchar(max)" />
+          <Property Name="Section" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ParkingSlots">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SlotName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsAssigned" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReleasedSlots">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkingSlotId" Type="int" />
+          <Property Name="ReleasedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestSlots">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SlotAllocations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="ParkingSlotId" Type="int" />
+          <Property Name="AllocationDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar(max)" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Height" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="real" Nullable="false" />
+          <Property Name="Grade_GradeId" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_Books_dbo_Authors_AuthorId">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId">
+          <End Role="ParkingSlots" Type="Self.ParkingSlots" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ParkingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_Roles_RoleId">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId">
+          <End Role="ParkingSlots" Type="Self.ParkingSlots" Multiplicity="0..1" />
+          <End Role="ReleasedSlots" Type="Self.ReleasedSlots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReleasedSlots">
+              <PropertyRef Name="ParkingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RequestSlots_dbo_Employees_EmployeeId">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="RequestSlots" Type="Self.RequestSlots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestSlots">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SlotAllocations_dbo_Employees_EmployeeId">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="SlotAllocations" Type="Self.SlotAllocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SlotAllocations">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId">
+          <End Role="ParkingSlots" Type="Self.ParkingSlots" Multiplicity="0..1" />
+          <End Role="SlotAllocations" Type="Self.SlotAllocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SlotAllocations">
+              <PropertyRef Name="ParkingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Students_dbo_Grades_Grade_GradeId">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="GradeId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Grade_GradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntityParkModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParkingSlots" EntityType="Self.ParkingSlots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReleasedSlots" EntityType="Self.ReleasedSlots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestSlots" EntityType="Self.RequestSlots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlotAllocations" EntityType="Self.SlotAllocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Books_dbo_Authors_AuthorId" Association="Self.FK_dbo_Books_dbo_Authors_AuthorId">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId" Association="Self.FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId">
+            <End Role="ParkingSlots" EntitySet="ParkingSlots" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Roles_RoleId" Association="Self.FK_dbo_Employees_dbo_Roles_RoleId">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId" Association="Self.FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId">
+            <End Role="ParkingSlots" EntitySet="ParkingSlots" />
+            <End Role="ReleasedSlots" EntitySet="ReleasedSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RequestSlots_dbo_Employees_EmployeeId" Association="Self.FK_dbo_RequestSlots_dbo_Employees_EmployeeId">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="RequestSlots" EntitySet="RequestSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SlotAllocations_dbo_Employees_EmployeeId" Association="Self.FK_dbo_SlotAllocations_dbo_Employees_EmployeeId">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="SlotAllocations" EntitySet="SlotAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId" Association="Self.FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId">
+            <End Role="ParkingSlots" EntitySet="ParkingSlots" />
+            <End Role="SlotAllocations" EntitySet="SlotAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Students_dbo_Grades_Grade_GradeId" Association="Self.FK_dbo_Students_dbo_Grades_Grade_GradeId">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EntityParkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_dbo_Books_dbo_Authors_AuthorId" FromRole="Authors" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Author" Relationship="Self.FK_dbo_Books_dbo_Authors_AuthorId" FromRole="Books" ToRole="Authors" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ParkingSlotId" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ParkingSlot" Relationship="Self.FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId" FromRole="Employees" ToRole="ParkingSlots" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_dbo_Employees_dbo_Roles_RoleId" FromRole="Employees" ToRole="Roles" />
+          <NavigationProperty Name="RequestSlots" Relationship="Self.FK_dbo_RequestSlots_dbo_Employees_EmployeeId" FromRole="Employees" ToRole="RequestSlots" />
+          <NavigationProperty Name="SlotAllocations" Relationship="Self.FK_dbo_SlotAllocations_dbo_Employees_EmployeeId" FromRole="Employees" ToRole="SlotAllocations" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeId" />
+          </Key>
+          <Property Name="GradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_dbo_Students_dbo_Grades_Grade_GradeId" FromRole="Grades" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="ParkingSlot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SlotName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAssigned" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId" FromRole="ParkingSlots" ToRole="Employees" />
+          <NavigationProperty Name="ReleasedSlots" Relationship="Self.FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId" FromRole="ParkingSlots" ToRole="ReleasedSlots" />
+          <NavigationProperty Name="SlotAllocations" Relationship="Self.FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId" FromRole="ParkingSlots" ToRole="SlotAllocations" />
+        </EntityType>
+        <EntityType Name="ReleasedSlot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkingSlotId" Type="Int32" />
+          <Property Name="ReleasedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ParkingSlot" Relationship="Self.FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId" FromRole="ReleasedSlots" ToRole="ParkingSlots" />
+        </EntityType>
+        <EntityType Name="RequestSlot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_RequestSlots_dbo_Employees_EmployeeId" FromRole="RequestSlots" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_Employees_dbo_Roles_RoleId" FromRole="Roles" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="SlotAllocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="ParkingSlotId" Type="Int32" />
+          <Property Name="AllocationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_SlotAllocations_dbo_Employees_EmployeeId" FromRole="SlotAllocations" ToRole="Employees" />
+          <NavigationProperty Name="ParkingSlot" Relationship="Self.FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId" FromRole="SlotAllocations" ToRole="ParkingSlots" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Height" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="Single" Nullable="false" />
+          <Property Name="Grade_GradeId" Type="Int32" />
+          <NavigationProperty Name="Grade" Relationship="Self.FK_dbo_Students_dbo_Grades_Grade_GradeId" FromRole="Students" ToRole="Grades" />
+        </EntityType>
+        <Association Name="FK_dbo_Books_dbo_Authors_AuthorId">
+          <End Role="Authors" Type="Self.Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Books" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId">
+          <End Role="ParkingSlots" Type="Self.ParkingSlot" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ParkingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Employees_dbo_Roles_RoleId">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RequestSlots_dbo_Employees_EmployeeId">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="RequestSlots" Type="Self.RequestSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestSlots">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SlotAllocations_dbo_Employees_EmployeeId">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="SlotAllocations" Type="Self.SlotAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SlotAllocations">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Students_dbo_Grades_Grade_GradeId">
+          <End Role="Grades" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="GradeId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Grade_GradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId">
+          <End Role="ParkingSlots" Type="Self.ParkingSlot" Multiplicity="0..1" />
+          <End Role="ReleasedSlots" Type="Self.ReleasedSlot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReleasedSlots">
+              <PropertyRef Name="ParkingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId">
+          <End Role="ParkingSlots" Type="Self.ParkingSlot" Multiplicity="0..1" />
+          <End Role="SlotAllocations" Type="Self.SlotAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParkingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SlotAllocations">
+              <PropertyRef Name="ParkingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="ParkingSlots" EntityType="Self.ParkingSlot" />
+          <EntitySet Name="ReleasedSlots" EntityType="Self.ReleasedSlot" />
+          <EntitySet Name="RequestSlots" EntityType="Self.RequestSlot" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="SlotAllocations" EntityType="Self.SlotAllocation" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_dbo_Books_dbo_Authors_AuthorId" Association="Self.FK_dbo_Books_dbo_Authors_AuthorId">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId" Association="Self.FK_dbo_Employees_dbo_ParkingSlots_ParkingSlotId">
+            <End Role="ParkingSlots" EntitySet="ParkingSlots" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Roles_RoleId" Association="Self.FK_dbo_Employees_dbo_Roles_RoleId">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RequestSlots_dbo_Employees_EmployeeId" Association="Self.FK_dbo_RequestSlots_dbo_Employees_EmployeeId">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="RequestSlots" EntitySet="RequestSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SlotAllocations_dbo_Employees_EmployeeId" Association="Self.FK_dbo_SlotAllocations_dbo_Employees_EmployeeId">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="SlotAllocations" EntitySet="SlotAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Students_dbo_Grades_Grade_GradeId" Association="Self.FK_dbo_Students_dbo_Grades_Grade_GradeId">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId" Association="Self.FK_dbo_ReleasedSlots_dbo_ParkingSlots_ParkingSlotId">
+            <End Role="ParkingSlots" EntitySet="ParkingSlots" />
+            <End Role="ReleasedSlots" EntitySet="ReleasedSlots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId" Association="Self.FK_dbo_SlotAllocations_dbo_ParkingSlots_ParkingSlotId">
+            <End Role="ParkingSlots" EntitySet="ParkingSlots" />
+            <End Role="SlotAllocations" EntitySet="SlotAllocations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntityParkModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="EntityParkModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="EntityParkModel.Author">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="EntityParkModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EntityParkModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ParkingSlotId" ColumnName="ParkingSlotId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="EntityParkModel.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParkingSlots">
+            <EntityTypeMapping TypeName="EntityParkModel.ParkingSlot">
+              <MappingFragment StoreEntitySet="ParkingSlots">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SlotName" ColumnName="SlotName" />
+                <ScalarProperty Name="IsAssigned" ColumnName="IsAssigned" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReleasedSlots">
+            <EntityTypeMapping TypeName="EntityParkModel.ReleasedSlot">
+              <MappingFragment StoreEntitySet="ReleasedSlots">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParkingSlotId" ColumnName="ParkingSlotId" />
+                <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestSlots">
+            <EntityTypeMapping TypeName="EntityParkModel.RequestSlot">
+              <MappingFragment StoreEntitySet="RequestSlots">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="EntityParkModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotAllocations">
+            <EntityTypeMapping TypeName="EntityParkModel.SlotAllocation">
+              <MappingFragment StoreEntitySet="SlotAllocations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ParkingSlotId" ColumnName="ParkingSlotId" />
+                <ScalarProperty Name="AllocationDate" ColumnName="AllocationDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="EntityParkModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Grade_GradeId" ColumnName="Grade_GradeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

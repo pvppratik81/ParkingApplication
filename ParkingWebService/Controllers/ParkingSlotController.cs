@@ -65,5 +65,13 @@ namespace ParkingWebService.Controllers
                 return objResp;
             }
         }
+
+        [HttpPost]
+        [Route("api/employeeslotrequest")]
+        public slotResponse EmployeeReleaseSlot([FromBody] SlotRequest objSlotEquest)
+        {
+            slotResponse onjResp = new slotResponse();
+            return onjResp;
+        }
     }
 }
