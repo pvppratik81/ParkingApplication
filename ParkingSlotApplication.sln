@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingWebService", "Parkin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{05D45C68-8966-442A-8135-CAAB294C03D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BALRepository", "BALRepository\BALRepository.csproj", "{4EA05638-52C5-4466-A8ED-6AEEB191B154}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{05D45C68-8966-442A-8135-CAAB294C03D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05D45C68-8966-442A-8135-CAAB294C03D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05D45C68-8966-442A-8135-CAAB294C03D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA05638-52C5-4466-A8ED-6AEEB191B154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA05638-52C5-4466-A8ED-6AEEB191B154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA05638-52C5-4466-A8ED-6AEEB191B154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA05638-52C5-4466-A8ED-6AEEB191B154}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
