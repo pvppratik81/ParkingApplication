@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingSlotApplicationWeb",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestWebApiPS", "RestWebApiPS\RestWebApiPS.csproj", "{EEF8519C-F956-4549-AB01-A026FC6E676A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingWebService", "ParkingWebService\ParkingWebService.csproj", "{4FB43495-C82D-4D70-B41E-24E6909D8FAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EEF8519C-F956-4549-AB01-A026FC6E676A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEF8519C-F956-4549-AB01-A026FC6E676A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEF8519C-F956-4549-AB01-A026FC6E676A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB43495-C82D-4D70-B41E-24E6909D8FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB43495-C82D-4D70-B41E-24E6909D8FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB43495-C82D-4D70-B41E-24E6909D8FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB43495-C82D-4D70-B41E-24E6909D8FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
