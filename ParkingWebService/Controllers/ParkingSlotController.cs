@@ -15,8 +15,55 @@ namespace ParkingWebService.Controllers
         [Route("api/employeeslotrequest")]
         public slotResponse Employeerequestslot([FromBody] SlotRequest objSlotEquest)
         {
-            slotResponse onjResp = new slotResponse();
-            return onjResp;
+            slotResponse objResp;
+            try
+            {
+                objResp = new slotResponse();
+                return objResp;
+            }
+            catch (Exception ex)
+            {
+                objResp = new slotResponse();
+                objResp.statusCode = "NOK";
+                return objResp;
+            }
+
+        }
+
+        [HttpPost]
+        [Route("api/employeecancelslotrequest")]
+        public slotResponse Employeecancelrequestslot([FromBody] SlotRequest objSlotEquest)
+        {
+            slotResponse objResp;
+            try
+            {
+                objResp = new slotResponse();
+                return objResp;
+            }
+            catch (Exception ex)
+            {
+                objResp = new slotResponse();
+                objResp.statusCode = "NOK";
+                return objResp;
+            }
+        }
+
+        [HttpPost]
+        [Route("api/employeeacceptslotrequest")]
+        public slotResponse Employeeacceptrequestslot([FromBody] SlotRequest objSlotEquest)
+        {
+            slotResponse objResp;
+            try
+            {
+                objResp = new slotResponse();
+                return objResp;
+            }
+            catch (Exception ex)
+            {
+                objResp = new slotResponse();
+                objResp.statusCode = "NOK";
+                return objResp;
+            }
         }
 
         [HttpPost]
