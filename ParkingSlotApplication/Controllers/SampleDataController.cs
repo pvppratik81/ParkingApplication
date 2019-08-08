@@ -40,5 +40,12 @@ namespace ParkingSlotApplication.Controllers
                 }
             }
         }
+
+        [HttpPost("[action]")]
+        public bool ReleaseSlot(string SlotId,DateTime releaseDate)
+        {
+            return true;
+        }
+
     }
 }
