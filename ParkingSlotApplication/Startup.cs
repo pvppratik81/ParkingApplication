@@ -43,6 +43,7 @@ namespace ParkingSlotApplication
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
