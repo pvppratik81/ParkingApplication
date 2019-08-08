@@ -14,24 +14,24 @@ namespace ParkingWebService.Controllers
         {
             new Employee()
                 {
-                    id = 1, name = "Mukesh Kumar", email = "New Delhi", phone = "IT"
+                    Id = 1, FirstName = "Mukesh Kumar", Email = "New Delhi", Phone = "IT"
                 },
                 new Employee()
                 {
-                     id = 2, name = "Mukesh Kumar1111", email = "New Delhi", phone = "IT"
+                     Id = 2, FirstName = "Mukesh Kumar1111", Email = "New Delhi", Phone = "IT"
                 },
                 new Employee()
                 {
-                     id = 3, name = "Mukesh Kumar111", email = "New Delhi", phone = "IT"
+                     Id = 3, FirstName = "Mukesh Kumar111", Email = "New Delhi", Phone = "IT"
                 },
                 new Employee()
                 {
-                     id = 4, name = "Mukesh Kumar11", email = "New Delhi", phone = "IT"
+                     Id = 4, FirstName = "Mukesh Kumar11", Email = "New Delhi", Phone = "IT"
                 },
                 new Employee()
                 {
-                     id =5, name = "Mukesh Kumar1", email = "New Delhi", phone = "IT"
-                },
+                     Id =5, FirstName = "Mukesh Kumar1", Email = "New Delhi", Phone = "IT"
+                }
         };
         [HttpGet]
         [Route ("api/employee")]
@@ -44,7 +44,7 @@ namespace ParkingWebService.Controllers
         public Employee GetEmployeeDetails(int id)
         {
             //Return a single employee detail  
-            var employee = employees.FirstOrDefault(e => e.id == id);
+            var employee = employees.FirstOrDefault(e => e.Id == id);
             if (employee == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

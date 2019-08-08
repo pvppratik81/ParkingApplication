@@ -6,25 +6,25 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
-  public forecasts: WeatherForecast[];
-
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
   }
 
   public requestSpot() {
-    let request = {
-      "employeeId": "Customer004"
-    };
-    this.http.post(this.baseUrl + 'api/SampleData/RequestSpot', request).subscribe(error => console.error(error));
-  }
-}
+    let url = this.baseUrl + 'api/ParkingSpot/RequestSpot' + '?employeeId=1234'
 
-interface WeatherForecast {
-  dateFormatted: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+    this.http.post(url, "").subscribe(error => console.error(error));
+  }
+
+  public acceptSpot() {
+    let url = this.baseUrl + 'api/ParkingSpot/AcceptSpot' + '?employeeId=1234'
+
+    this.http.post(url, "").subscribe(error => console.error(error));
+  }
+
+  public declineSpot() {
+    let url = this.baseUrl + 'api/ParkingSpot/DeclineSpot' + '?employeeId=1234'
+
+    this.http.post(url, "").subscribe(error => console.error(error));
+  }
+
 }
