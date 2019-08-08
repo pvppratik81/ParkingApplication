@@ -11,8 +11,8 @@ namespace DAL
     {
         public UCBContext() : base("name=UCBDBConnectionString")
         {
-            
-          
+            Database.SetInitializer<UCBContext>(new CreateDatabaseIfNotExists<UCBContext>());
+
         }
 
 
