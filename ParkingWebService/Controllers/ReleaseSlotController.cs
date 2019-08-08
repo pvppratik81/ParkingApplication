@@ -18,7 +18,7 @@ namespace ParkingWebService.Controllers
             try
             {
                 
-                List<ReleaseSlot> objList = new List<ReleaseSlot>();
+                //List<ReleaseSlot> objList = new List<ReleaseSlot>();
                 ReleaseSlot rs = new ReleaseSlot();
                 rs.ParkingSlotId = 10;
                 rs.ReleasedDate = System.DateTime.Today;
