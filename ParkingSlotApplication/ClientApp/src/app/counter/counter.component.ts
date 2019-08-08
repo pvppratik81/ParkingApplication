@@ -11,6 +11,9 @@ export class CounterComponent {
   }
   public status:boolean;
 
+  public releaseSlotForParking() {
+    let url = this.baseUrl + 'api/ParkingSpot/ReleaseSpot' + '?employeeId=1234'
+
     this.http.post(url, "").subscribe(error => console.error(error));
   }
 } 

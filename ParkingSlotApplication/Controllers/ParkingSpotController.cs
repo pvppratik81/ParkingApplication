@@ -10,5 +10,20 @@ namespace ParkingSlotApplication.Controllers
         {
             //to do
         }
+        [HttpPost("[action]")]
+        public void AcceptSpot(int employeeId)
+        {
+            //to do
+        }
+        [HttpPost("[action]")]
+        public void RequesDeclineSpottSpot(int employeeId)
+        {
+            //to do
+        }
+        [HttpPost("[action]")]
+        public void ReleaseSpot(int employeeId)
+        {
+            //to do
+        }
     }
 }
